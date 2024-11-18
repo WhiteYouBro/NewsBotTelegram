@@ -1,7 +1,8 @@
 const TelegramBot = require('node-telegram-bot-api');
 const fs = require('fs');
 const bot = new TelegramBot('7637469255:AAFBthW1KsfgQGWg0GTOQeDe5GAhQOOU6zs', { polling: true }); // api бота
-const needchannelid = "-1002366112090"; // сюда нужно вставить id чата с каналом постов
+//const needchannelid = "-1002366112090"; // сюда нужно вставить id чата с каналом постов
+const needchannelid = "-1002435725660";
 const usersFile = 'users.json';
 function initializeUsersFile() {
     if (!fs.existsSync(usersFile)) {
@@ -45,14 +46,17 @@ bot.onText(/\/start/, (msg) => {
             [{ text: 'Offer news', url: 'https://t.me/TR_808' }]
         ]
     } })
+    addUser(chatId);
+    bot.sendMessage(chatId, 'Вы успешно подписались на рассылку! Для отмены подписки, введите: /unsubscribe.'); // 
 });
 
+/*
 bot.onText(/\/subscribe/, (msg) => {
     const chatId = msg.chat.id;
     addUser(chatId);
     bot.sendMessage(chatId, 'Вы успешно подписались на рассылку!');
 });
-
+*/
 bot.onText(/\/unsubscribe/, (msg) => {
     const chatId = msg.chat.id;
     removeUser(chatId);
